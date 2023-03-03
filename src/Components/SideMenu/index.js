@@ -6,8 +6,9 @@ import {
   } from "@ant-design/icons";
   import { Menu } from "antd";
   
-  
+  import {useNavigate} from 'react-router-dom'
   function SideMenu() {
+    const navigate=useNavigate();
     
   
     
@@ -18,7 +19,7 @@ import {
           mode="vertical"
           onClick={(item) => {
             //item.key
-           
+            navigate(item.key)
           }}
           
           items={[
@@ -43,14 +44,14 @@ import {
               icon: <UserOutlined />,
             },
             {
-                label: "Dashbaord",
-                icon: <AppstoreOutlined />,
-                key: "/",
+                label: "Orders",
+                key: "/orders",
+                icon: <ShoppingCartOutlined />,
               },
               {
-                label: "Inventory",
-                key: "/inventory",
-                icon: <ShopOutlined />,
+                label: "Customers",
+                key: "/customers",
+                icon: <UserOutlined />,
               },
               {
                 label: "Orders",
@@ -61,8 +62,17 @@ import {
                 label: "Customers",
                 key: "/customers",
                 icon: <UserOutlined />,
+              },{
+                label: "Orders",
+                key: "/orders",
+                icon: <ShoppingCartOutlined />,
               },
-              
+              {
+                label: "Customers",
+                key: "/customers",
+                icon: <UserOutlined />,
+              },
+             
             
           ]}
         ></Menu>

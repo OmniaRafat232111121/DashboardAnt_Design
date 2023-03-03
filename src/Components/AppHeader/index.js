@@ -6,7 +6,7 @@ const AppHeader = () => {
       <Image 
       width={40}
        src="https://yt3.ggpht.com/ytc/AMLnZu83ghQ28n1SqADR-RbI2BGYTrqqThAtJbfv9jcq=s176-c-k-c0x00ffffff-no-rj"></Image>
-   <Typography.Title>Dashboard</Typography.Title>
+   <Typography.Title style={{fontSize:20,fontFamily:'Poppins'}}>Dashboard</Typography.Title>
    <Space>
     <Badge count={10} >
     <MailOutlined style={{fontSize:24}}/>
