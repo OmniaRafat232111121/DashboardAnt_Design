@@ -18,8 +18,11 @@
 
 
 .PageContent{
-  padding-left: 20px;
+  padding: 20px;
   margin-top: 20px;
+  display: grid;
+  justify-self: center;
+
 
 }
 .AppFooter{
@@ -47,7 +50,6 @@
 }
 .type{
   
-  padding-bottom: 30px;
   margin:0 auto;
   text-align: center;
   width: min(30%,100%);

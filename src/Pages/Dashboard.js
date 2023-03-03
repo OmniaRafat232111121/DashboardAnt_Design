@@ -1,6 +1,7 @@
 import { Card, Space, Statistic, Table } from 'antd'
 import Typography from 'antd/es/typography/Typography'
 import React,{useEffect, useState} from 'react'
+import { getOrders, getRevenue } from '../API';
 
 import {
     DollarCircleOutlined,
@@ -8,10 +9,29 @@ import {
     ShoppingOutlined,
     UserOutlined,
   } from "@ant-design/icons";
-import { getOrders } from '../API';
+  import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Bar } from 'react-chartjs-2';
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+  
 
 const Dashboard = () => {
     const [orders,setOrders]=useState(0);
+    const [revenu,setRevenu]=useState(0);
    
   return (
     <div>
@@ -85,7 +105,7 @@ const Dashboard = () => {
           icon={
             <DollarCircleOutlined
               style={{
-                color: "red",
+                color: "Blue",
                 backgroundColor: "rgba(255,0,0,0.25)",
                 borderRadius: 20,
                 fontSize: 24,
@@ -99,8 +119,11 @@ const Dashboard = () => {
 
       </Space>
       </div>
-      <Space>
+      <Space  size={40} direction="horizontal" style={{
+       
+      }}>
         <RecentOrders/>
+       <DashboardChart/>
       </Space>
         </Space>
     
@@ -160,4 +183,55 @@ const [dataSource,setDataSource]=useState([])
       ></Table>
     )
 }
-export default Dashboard
+
+function DashboardChart() {
+    const [reveneuData, setReveneuData] = useState({
+      labels: [],
+      datasets: [],
+    });
+  
+    useEffect(() => {
+      getRevenue().then((res) => {
+        const labels = res.carts.map((cart) => {
+          return `User-${cart.userId}`;
+        });
+        const data = res.carts.map((cart) => {
+          return cart.discountedTotal;
+        });
+  
+        const dataSource = {
+          labels,
+          datasets: [
+            {
+              label: "Revenue",
+              data: data,
+              backgroundColor: "rgba(255, 0, 0, 1)",
+            },
+          ],
+        };
+  
+        setReveneuData(dataSource);
+      });
+    }, []);
+  
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        title: {
+          display: true,
+          text: "Order Revenue",
+        },
+      },
+    };
+
+return(
+    <Card style={{ width: 400, height: 200 }}>
+    <Bar options={options} data={reveneuData} />
+  </Card>
+)
+}
+export default Dashboard;
+
