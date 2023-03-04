@@ -44,7 +44,11 @@ import {
               key: "/customers",
               icon: <UserOutlined />,
             },
-          
+            {
+                label: "Details",
+                key: "/details",
+                icon: <PieChartOutlined  />,
+              },
            
           ]}
         ></Menu>
