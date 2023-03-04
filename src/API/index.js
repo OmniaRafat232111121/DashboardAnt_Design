@@ -20,3 +20,9 @@ export const getCustomers=()=>{
 .then(res => res.json())
 
 }
+export const getComments=()=>{
+    return fetch('https://dummyjson.com/comments')
+    .then((res)=>{
+        return res.json();
+    })
+}
