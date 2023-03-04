@@ -1,7 +1,7 @@
 import { Card, Space, Statistic, Table } from 'antd'
 import Typography from 'antd/es/typography/Typography'
 import React,{useEffect, useState} from 'react'
-import { getOrders, getRevenue } from '../API';
+import { getCustomers, getInventory, getOrders, getRevenue } from '../API';
 
 import {
     DollarCircleOutlined,
@@ -31,15 +31,28 @@ import {
 
 const Dashboard = () => {
     const [orders,setOrders]=useState(0);
+    const [inventory,setInventory]=useState(0);
     const [revenu,setRevenu]=useState(0);
-   
+    const [customers,setCustomers]=useState(0);
+   useEffect(()=>{
+    getOrders().then((res)=>{
+      setOrders(res.total);
+      setRevenu(res.discountedTotal)
+    });
+    getInventory().then((res)=>{
+      setInventory(res.total)
+    })
+    getCustomers().then((res)=>{
+      setCustomers(res.total)
+    })
+   })
   return (
-    <div>
+    <div className='type'>
         <Space size={20} direction="vertical">
         <Typography.Title level={4}>
             Dashboard
         </Typography.Title>
-        <div className='type'>
+        <div>
         <Space direction="horizontal">
         <DashboardCard
           icon={
@@ -53,8 +66,8 @@ const Dashboard = () => {
               }}
             />
           }
-          title={"Orders"}
-          value={100}
+          title={"Inventory"}
+          value={inventory}
         />
         <DashboardCard
           icon={
@@ -68,8 +81,8 @@ const Dashboard = () => {
               }}
             />
           }
-          title={"Inventory"}
-          value={200}
+          title={"Revenu"}
+          value={revenu}
         />
         <DashboardCard
           icon={
@@ -84,7 +97,7 @@ const Dashboard = () => {
             />
           }
           title={"Orders"}
-          value={100}
+          value={orders}
         />
         <DashboardCard
           icon={
@@ -99,23 +112,9 @@ const Dashboard = () => {
             />
           }
           title={"Customer"}
-          value={300}
+          value={customers}
         />
-        <DashboardCard
-          icon={
-            <DollarCircleOutlined
-              style={{
-                color: "Blue",
-                backgroundColor: "rgba(255,0,0,0.25)",
-                borderRadius: 20,
-                fontSize: 24,
-                padding: 8,
-              }}
-            />
-          }
-          title={"Revenue"}
-          value={150}
-        />
+        
 
       </Space>
       </div>
@@ -124,6 +123,7 @@ const Dashboard = () => {
       }}>
         <RecentOrders/>
        <DashboardChart/>
+
       </Space>
         </Space>
     
@@ -205,7 +205,7 @@ function DashboardChart() {
             {
               label: "Revenue",
               data: data,
-              backgroundColor: "rgba(255, 0, 0, 1)",
+              backgroundColor: "rgba(40, 34,255, 1)",
             },
           ],
         };

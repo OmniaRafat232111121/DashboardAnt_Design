@@ -29,6 +29,8 @@
   height:50px;
   display:flex;
   align-items: center;
+  background-color: rgb(47, 47, 47);
+  color:#fff;
   justify-content: space-evenly;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
 
@@ -49,8 +51,7 @@
   background-color: #fff;
 }
 .type{
-  
   margin:0 auto;
   text-align: center;
-  width: min(30%,100%);
+  width: min(90%,100%);
 }

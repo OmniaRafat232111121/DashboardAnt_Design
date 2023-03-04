@@ -3,6 +3,7 @@ import {
     ShopOutlined,
     ShoppingCartOutlined,
     UserOutlined,
+    PieChartOutlined
   } from "@ant-design/icons";
   import { Menu } from "antd";
   
@@ -43,37 +44,8 @@ import {
               key: "/customers",
               icon: <UserOutlined />,
             },
-            {
-                label: "Orders",
-                key: "/orders",
-                icon: <ShoppingCartOutlined />,
-              },
-              {
-                label: "Customers",
-                key: "/customers",
-                icon: <UserOutlined />,
-              },
-              {
-                label: "Orders",
-                key: "/orders",
-                icon: <ShoppingCartOutlined />,
-              },
-              {
-                label: "Customers",
-                key: "/customers",
-                icon: <UserOutlined />,
-              },{
-                label: "Orders",
-                key: "/orders",
-                icon: <ShoppingCartOutlined />,
-              },
-              {
-                label: "Customers",
-                key: "/customers",
-                icon: <UserOutlined />,
-              },
-             
-            
+          
+           
           ]}
         ></Menu>
       </div>
